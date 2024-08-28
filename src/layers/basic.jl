@@ -353,7 +353,7 @@ statelength(d::Dense) = 0
 outputsize(d::Dense) = (d.out_dims,)
 
 function (d::Dense)(x::AbstractVector, ps, st::NamedTuple)
-    return vec(first(d(reshape(x, :, 1), ps, st))), st
+    return vec(first(d(get_utils(:insert_batch_dim)(x), ps, st))), st
 end
 
 function (d::Dense)(x::AbstractArray, ps, st::NamedTuple)
